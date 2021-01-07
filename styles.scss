@@ -1,7 +1,10 @@
+$red: #ad1f25;
+
 * {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    // font-size: 62.5%;
 }
 
 body {
@@ -12,32 +15,29 @@ body {
 
 #logo {
     position: absolute;
-    height: 200px;
+    height: 50px;
     width: auto;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: fill 0.5s ease forwards 3s;
+    animation: fills 0.5s ease forwards 3s;
+
+    .paths {
+        stroke: $red;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+    }
 }
 
-// scripts.js:4 Letter 0 is 581.21826171875
-// scripts.js:4 Letter 1 is 515.0452880859375
-// scripts.js:4 Letter 2 is 319.2000427246094
-// scripts.js:4 Letter 3 is 319.1800231933594
-// scripts.js:4 Letter 4 is 304.4000244140625
-// scripts.js:4 Letter 5 is 394.4635009765625
-// scripts.js:4 Letter 6 is 731.5657348632812
-// scripts.js:4 Letter 7 is 846.5765991210938
-
-$text-lengths : (
-    1:  581.22,
-    2:  515.05,
-    3:  319.2,
-    4:  319.2,
-    5:  304.4,
-    6:  394.5,
-    7:  731.6,
-    8:  846.6
+$text-lengths: (
+    1: 579.76904296875,
+    2: 572.0400390625,
+    3: 585.7536010742188,
+    4: 417.20001220703125,
+    5: 634.8458862304688,
+    6: 629.6207275390625,
+    7: 572.0399780273438,
+    8: 594.1424560546875
 );
 
 @each $pos, $length in $text-lengths {
@@ -46,7 +46,7 @@ $text-lengths : (
         stroke-dashoffset: #{$length}px;
         animation: line-animation 2s ease forwards #{0.3 * $pos}s;
     }
-  }
+}
 
 @keyframes line-animation {
     to {
@@ -54,11 +54,11 @@ $text-lengths : (
     }
 }
 
-@keyframes fill {
+@keyframes fills {
     from {
         fill: transparent;
     }
     to {
-        fill: #ad1f25;
+        fill: $red;
     }
 }
