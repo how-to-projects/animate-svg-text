@@ -1,0 +1,64 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(32, 35, 48);
+}
+
+#logo {
+    position: absolute;
+    height: 200px;
+    width: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: fill 0.5s ease forwards 3s;
+}
+
+// scripts.js:4 Letter 0 is 581.21826171875
+// scripts.js:4 Letter 1 is 515.0452880859375
+// scripts.js:4 Letter 2 is 319.2000427246094
+// scripts.js:4 Letter 3 is 319.1800231933594
+// scripts.js:4 Letter 4 is 304.4000244140625
+// scripts.js:4 Letter 5 is 394.4635009765625
+// scripts.js:4 Letter 6 is 731.5657348632812
+// scripts.js:4 Letter 7 is 846.5765991210938
+
+$text-lengths : (
+    1:  581.22,
+    2:  515.05,
+    3:  319.2,
+    4:  319.2,
+    5:  304.4,
+    6:  394.5,
+    7:  731.6,
+    8:  846.6
+);
+
+@each $pos, $length in $text-lengths {
+    #logo path:nth-child(#{$pos}) {
+        stroke-dasharray: #{$length}px;
+        stroke-dashoffset: #{$length}px;
+        animation: line-animation 2s ease forwards #{0.3 * $pos}s;
+    }
+  }
+
+@keyframes line-animation {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fill {
+    from {
+        fill: transparent;
+    }
+    to {
+        fill: #ad1f25;
+    }
+}
