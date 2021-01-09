@@ -1,6 +1,9 @@
-const logo = document.querySelectorAll('#logo path');
-
+// const logo = document.querySelectorAll('#logo path');
+const logo = document.querySelector('#logo');
+const s = logo.getElementsByClassName('paths');
+debugger;
 for (let i =0; i < logo.length; i++) {
+    debugger;
     console.log(`${i + 1}: ${logo[i].getTotalLength()},`);
 }
 

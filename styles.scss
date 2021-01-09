@@ -1,10 +1,11 @@
 $red: #ad1f25;
+$thinky: #1f85ad;
 
 * {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    // font-size: 62.5%;
+    font-size: 62.5%;
 }
 
 body {
@@ -15,12 +16,13 @@ body {
 
 #logo {
     position: absolute;
-    height: 50px;
+    height: 300px;
     width: auto;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: fills 0.5s ease forwards 3s;
+    animation: fills 0.5s ease forwards 3.75s;
+    // animation: removestroke 0.5s ease forwards 6s;
 
     .paths {
         stroke: $red;
@@ -29,23 +31,37 @@ body {
     }
 }
 
-$text-lengths: (
-    1: 579.76904296875,
-    2: 572.0400390625,
-    3: 585.7536010742188,
-    4: 417.20001220703125,
-    5: 634.8458862304688,
-    6: 629.6207275390625,
-    7: 572.0399780273438,
-    8: 594.1424560546875
+// pull it off logo
+
+// $text-lengths: (
+//     1: 579.76904296875,
+//     2: 572.0400390625,
+//     3: 585.7536010742188,
+//     4: 417.20001220703125,
+//     5: 634.8458862304688,
+//     6: 629.6207275390625,
+//     7: 572.0399780273438,
+//     8: 594.1424560546875
+// );
+
+$path-lengths: (
+    1: 1859.630126953125,
+    2: 947.1533813476562,
+    3: 466.7752380371094,
+    4: 56.18000793457031,
+    5: 56.18000793457031
+
 );
 
-@each $pos, $length in $text-lengths {
-    #logo path:nth-child(#{$pos}) {
-        stroke-dasharray: #{$length}px;
-        stroke-dashoffset: #{$length}px;
-        animation: line-animation 2s ease forwards #{0.3 * $pos}s;
+// select element type #logo path:nth-child(#{ $pos }) {
+// select element by class name #logo .paths:nth-child(#{ $pos }) {
+@each $pos, $length in $path-lengths {
+    #logo .paths:nth-child(#{ $pos }) {
+        stroke-dasharray: #{ $length }px;
+        stroke-dashoffset: #{ $length }px;
+        animation: line-animation 3s ease forwards #{0.3 * $pos}s;
     }
+    
 }
 
 @keyframes line-animation {
@@ -62,3 +78,4 @@ $text-lengths: (
         fill: $red;
     }
 }
+
