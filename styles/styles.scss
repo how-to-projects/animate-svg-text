@@ -1,0 +1,123 @@
+$red: #ad1f25;
+$thinky: #1f85ad;
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    // font-size: 62.5%;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(32, 35, 48);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.paths {
+    stroke: $red;
+    stroke-miterlimit: 10;
+    stroke-width: 3px;
+}
+
+.animated-fill {
+    fill: none;
+    animation: fill 0.5s ease forwards 2s;
+}
+
+// pull it off logo
+$pull-it-off-compound-path: (
+    1: 4965.423828125
+);
+
+// thinky
+$path-lengths: (
+    1: 1859.630126953125,
+    2: 947.1533813476562,
+    3: 466.7752380371094,
+    4: 56.18000793457031,
+    5: 56.18000793457031
+
+);
+
+$fathym-text-lengths: (
+    1: 1757.179443359375
+);
+
+/*
+* styles for each svg to animate
+*/
+@mixin svg($height, $width) {
+
+    height: #{ $height };
+    width: #{ $width };
+
+    overflow: visible;
+
+    @extend .animated-fill;
+    @extend .paths;
+}
+
+#logo {
+    @include svg(300px, auto);
+}
+
+#fathymText {
+    @include svg(auto, 600px);
+}
+
+#pullitoff {
+    @include svg(500px, auto);
+}
+
+// select element type #logo path:nth-child(#{ $pos }) {
+// select element by class name #logo .paths:nth-child(#{ $pos }) {
+@mixin animate($map) {
+    @each $mm, $item in $map {
+        @each $pos, $length in $mm {
+            ##{$item} .paths:nth-child(#{ $pos }) {
+                stroke-dasharray: #{ $length }px;
+                stroke-dashoffset: #{ $length }px;
+                animation: line-animation 5s ease forwards #{0.3 * $pos}s;
+            }
+        }
+    }
+}
+
+/**
+* @param - map of path lengths
+* @param - element id to target
+*/
+$svgs: (
+    $pull-it-off-compound-path: pullitoff,
+    $fathym-text-lengths: fathymText,
+    $path-lengths: logo 
+);
+
+@include animate($svgs);
+
+@keyframes line-animation {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fill {
+    from {
+        fill: transparent;
+    }
+    to {
+        fill: $red;
+    }
+}
+
